@@ -15,22 +15,61 @@
         <div>Left Motor Speed: <span id="leftAmt">0.2</span> rpm</div>
         <div id="runTime" style="width: 25%"></div>
         <div>Run Time: <span id="runTimeAmt">600</span> seconds</div>
-        <!--<button>Redraw</button>-->
+        <form>
+            <div id="Rradio">
+                Right motor function:
+                <input type="radio" id="R_linear" name="radio"><label for="R_linear">linear</label>
+                <input type="radio" id="R_sin" name="radio"><label for="R_sin">sine</label>
+                <input type="radio" id="R_cos" name="radio" checked="checked"><label for="R_cos">cosine</label>
+                <input type="radio" id="R_tan" name="radio"><label for="R_tan">tangent</label>
+                <input type="radio" id="R_asin" name="radio"><label for="R_asin">inverse sine</label>
+                <input type="radio" id="R_acos" name="radio"><label for="R_acos">inverse cosine</label>
+                <input type="radio" id="R_atan" name="radio"><label for="R_atan">inverse tangent</label>
+            </div>
+        </form>
+        <form>
+            <div id="Lradio">
+                Right motor function:
+                <input type="radio" id="L_linear" name="radio"><label for="L_linear">linear</label>
+                <input type="radio" id="L_sin" name="radio"><label for="L_sin">sine</label>
+                <input type="radio" id="L_cos" name="radio" checked="checked"><label for="L_cos">cosine</label>
+                <input type="radio" id="L_tan" name="radio"><label for="L_tan">tangent</label>
+                <input type="radio" id="L_asin" name="radio"><label for="L_asin">inverse sine</label>
+                <input type="radio" id="L_acos" name="radio"><label for="L_acos">inverse cosine</label>
+                <input type="radio" id="L_atan" name="radio"><label for="L_atan">inverse tangent</label>
+            </div>
+        </form>
     </body>
 
     <script>
-        rightMotorSlider = parseInt($("#rightAmt").text());
-        leftMotorSlider = parseInt($("#leftAmt").text());
-        runTime = parseInt($("#runTimeAmt").text());
+        rightMotorSlider = parseFloat($("#rightAmt").text());
+        leftMotorSlider = parseFloat($("#leftAmt").text());
+        runTime = parseFloat($("#runTimeAmt").text());
+        $(function () {
+            $("#Rradio").buttonset();
+            rightSelector = $("#Rradio :radio:checked + label").text();
+        });
+        $(function () {
+            $("#Lradio").buttonset();
+            leftSelector = $("#Lradio :radio:checked + label").text();
+        });
+        $('#Rradio').on("change", function (event) {
+            rightSelector = $("#Rradio :radio:checked + label").text();
+            graph();
+        });
+        $('#Lradio').on("change", function (event) {
+            leftSelector = $("#Lradio :radio:checked + label").text();
+            graph();
+        });
         $(function () {
             $("#rightMotor").slider({
-                max: 20,
+                max: 600,
                 min: 1,
-                step: 1,
+                step: 10,
                 value: 8,
                 slide: function (event, ui) {
                     $("#rightAmt").text(ui.value);
-                    rightMotorSlider = ui.value;
+                    rightMotorSlider = parseFloat(ui.value);
                     graph();
                 }
             });
@@ -43,7 +82,7 @@
                 value: 0.1,
                 slide: function (event, ui) {
                     $("#leftAmt").text(ui.value);
-                    leftMotorSlider = ui.value;
+                    leftMotorSlider = parseFloat(ui.value);
                     graph();
                 }
             });
