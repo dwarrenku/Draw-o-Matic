@@ -1,4 +1,4 @@
-var rightMotorSlider, leftMotorSlider, runTime;
+var rightMotorSlider, leftMotorSlider, runTime, rightMotorRadius, leftMotorRadius;
 var xy;
 var max, min;
 var rightSelector, leftSelector;
@@ -33,6 +33,10 @@ function graph()
             break;
         case "tangent":
             rate_right = Math.tan(((2 * pi) / rightrpm));
+            break;
+        case "inverse tangent":
+            rate_right = Math.atan(((2 * pi) / rightrpm));
+            break;
     }
     switch (leftSelector)
     {
@@ -48,12 +52,6 @@ function graph()
         case "tangent":
             rate_left = Math.tan(((2 * pi) / leftrpm));
             break;
-        case "inverse sine":
-            rate_left = Math.asin(((2 * pi) / leftrpm));
-            break;
-        case "inverse cosine":
-            rate_left = Math.acos(((2 * pi) / leftrpm));
-            break;
         case "inverse tangent":
             rate_left = Math.atan(((2 * pi) / leftrpm));
             break;
@@ -68,13 +66,13 @@ function graph()
     var origin_right = [35, 0];
 
     //radius of gears
-    var radius_left = 5;
-    var radius_right = 9;
+    var radius_left = leftMotorRadius;
+    var radius_right = rightMotorRadius;
 
     //segment lengths
     var length_ce = 30, length_eg = 10;
     var length_de = 30, length_ef = 10;
-    var length_fh = 10, length_hi = 3;
+    var length_fh = 10, length_hi = 0;
     var length_gh = 10;
     var length_cg = length_ce + length_eg;
     var length_fi = length_fh + length_hi;
