@@ -72,7 +72,7 @@ function graph()
     //segment lengths
     var length_ce = 30, length_eg = 10;
     var length_de = 30, length_ef = 10;
-    var length_fh = 10, length_hi = 0;
+    var length_fh = 10, length_hi = 3;
     var length_gh = 10;
     var length_cg = length_ce + length_eg;
     var length_fi = length_fh + length_hi;
